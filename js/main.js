@@ -144,11 +144,11 @@ products.forEach(element =>{
     <div class="w-[300px] border-gray-500 bg-[#F9F9F9] shadow-lg shadow-gray-500 hover:shadow-2xl border-none px-2 py-4 rounded-lg overflow-hidden hover:shadow-[skyblue] transition-all">
         <img  src=${img} alt="" id="image-prod" class="w-[100%] h-[50%] object-cover cursor-pointer">
         <div class="flex justify-between text-[#373737] text-lfont-semibold py-2">
-            <p id="name">${name}</p>
-            <p>$ ${price}</p>
+            <p id="name" class="font-semibold text-2xl text-red-500">${name}</p>
+            <p class="font-semibold text-2xl text-cyan-500">$ ${price}</p>
         </div>
         <p class="text-[#696161] py-3"> ${description}</p>
-        <p class="pb-2 text-[#696161]" id="categr">${category}</p>
+        <p class="pb-2 text-[#696161]" id="categr">Category : ${category}</p>
         <button onclick="AddForm(${id - 1 })" class="py-2 px-4 bg-[#373737] rounded-md text-white hover:opacity-70 transition-colors">Order Now</button>
     </div>
     `
@@ -169,11 +169,8 @@ function myFunc (){
     inputSearch.addEventListener("input", () => {
         
         const search = inputSearch.value.toLowerCase().trim()
-        loader.classList.remove("hidden")
-        
-        setTimeout(()=>{
-
-            parentProduct.childNodes.forEach(el=>{
+    
+          parentProduct.childNodes.forEach(el=>{
                 if(el.className) {
                   let itemName = el.querySelector('#name').textContent.toLowerCase()
                   if (!itemName.includes(search)){
@@ -183,18 +180,33 @@ function myFunc (){
                   }
                 }
             })
-      
-
-        loader.classList.add("hidden")
-        
-        },600)
     })
 }
 myFunc()
 inputForm.addEventListener('submit', (e)=>{
-    // e.preventDefault()
-    console.log("input tozalandi");
-    inputSearch.value = ""
+    e.preventDefault()
+
+    const search = inputSearch.value.toLowerCase().trim()
+    loader.classList.remove("hidden")
+    
+    setTimeout(()=>{
+
+        parentProduct.childNodes.forEach(el=>{
+            if(el.className) {
+              let itemName = el.querySelector('#name').textContent.toLowerCase()
+              if (!itemName.includes(search)){
+                  el.classList.add('hidden')
+              } else {
+                  el.classList.remove('hidden')
+              }
+            }
+        })
+  
+
+    loader.classList.add("hidden")
+    
+    },600)
+    
 })
 
 function AddForm(idx){
@@ -207,12 +219,13 @@ function AddForm(idx){
     forPro.innerHTML = `
     <img src=${img} alt="" id="image-prod" class="w-[50%] h-[500px] object-cover cursor-pointer">
             
-        <div class="text-lg text-[#373737] ">
-                    <p id="name"><b>Name of product : </b> ${name}</p>
-                    <p><b>Price : </b> $ ${price}</p>
+        <div class="text-lg text-[#373737] flex flex-col justify-between gap-3">
+                    <p id="name" class="font-semibold text-2xl text-red-500"><b>Name of product : </b> ${name}</p>
+                    <p class="font-semibold text-2xl text-cyan-500"><b>Price : </b> $ ${price}</p>
                 <p class="text-[#696161] py-3"><b>Description: </b> ${description}</p>
                 <p class="pb-2 text-[#696161]"><b>Category : </b> ${category} </p>
-                <button onclick="clickme()" class="py-2 px-4 bg-[#373737] rounded-md text-white hover:opacity-70 transition-colors">Order Now</button>
+                <p class="pb-2 text-[#696161]"><b>About of product : </b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam ab, cupiditate ipsam odit, voluptatum consequatur consequuntur sit a molestiae repudiandae corporis facere porro quam atque officiis! Aliquid obcaecati reprehenderit eius! </p>
+                <button onclick="clickme()" class="py-2 mt-10 px-4 bg-[#373737] rounded-md text-white hover:opacity-70 transition-colors">Order Now</button>
         </div>
     `
     loader.classList.add("hidden")
