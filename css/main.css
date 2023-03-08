@@ -4,6 +4,11 @@
 ::-webkit-scrollbar-thumb{
     background: #000;
 }
+
+.loader{
+    background: rgba(0, 0, 0, 0.15) ;
+    backdrop-filter: blur(15px);
+}
 #header{
     background: rgba(0, 0, 0, 0.15) ;
     backdrop-filter: blur(15px);

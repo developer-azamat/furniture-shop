@@ -2,7 +2,11 @@ const parentProduct = document.querySelector('#parentProduct')
 const inputSearch = document.querySelector('#nameOf')
 const inputForm = document.querySelector('#nameOfForm')
 const forPro = document.querySelector('#forPro')
+const loader = document.querySelector('.loader')
 
+setTimeout(() => {
+    loader.classList.add("hidden")
+}, 2000);
 
 
 const products = [
@@ -129,6 +133,10 @@ const products = [
 ]
 
 products.forEach(element =>{
+    setTimeout(()=>{
+        loader.classList.remove("hidden")
+        loader.classList.add("hidden")
+    },1000)
 
     const {img, name, price, description, category, id} = element;
 
@@ -159,19 +167,26 @@ fixedEl.addEventListener('click', (e)=>{
 
 function myFunc (){
     inputSearch.addEventListener("input", () => {
-    
+        
         const search = inputSearch.value.toLowerCase().trim()
-    
-        parentProduct.childNodes.forEach(el=>{
-          if(el.className) {
-            let itemName = el.querySelector('#name').textContent.toLowerCase()
-            if (!itemName.includes(search)){
-                el.classList.add('hidden')
-            } else {
-                el.classList.remove('hidden')
-            }
-          }
-        })
+        loader.classList.remove("hidden")
+        
+        setTimeout(()=>{
+
+            parentProduct.childNodes.forEach(el=>{
+                if(el.className) {
+                  let itemName = el.querySelector('#name').textContent.toLowerCase()
+                  if (!itemName.includes(search)){
+                      el.classList.add('hidden')
+                  } else {
+                      el.classList.remove('hidden')
+                  }
+                }
+              })
+      
+
+            loader.classList.add("hidden")
+        },600)
     })
 }
 myFunc()
@@ -182,6 +197,7 @@ inputForm.addEventListener('submit', (e)=>{
 })
 
 function AddForm(idx){
+    loader.classList.remove("hidden")
     forPro.parentElement.classList.remove("hidden")
     forPro.parentElement.classList.add("flex")
 
@@ -198,6 +214,8 @@ function AddForm(idx){
                 <button onclick="clickme()" class="py-2 px-4 bg-[#373737] rounded-md text-white hover:opacity-70 transition-colors">Order Now</button>
         </div>
     `
+    loader.classList.add("hidden")
+
 }
 
 function clickme(){
