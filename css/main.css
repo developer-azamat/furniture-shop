@@ -4,6 +4,11 @@
 ::-webkit-scrollbar-thumb{
     background: #000;
 }
+.activePro{
+  position: fixed ;
+  left: 900px;
+  top: 10000px;
+}
 
 .loader{
     background: rgba(0, 0, 0, 0.15) ;

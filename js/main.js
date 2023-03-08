@@ -142,14 +142,14 @@ products.forEach(element =>{
 
     parentProduct.innerHTML += `
     <div class="w-[300px] border-gray-500 bg-[#F9F9F9] shadow-lg shadow-gray-500 hover:shadow-2xl border-none px-2 py-4 rounded-lg overflow-hidden hover:shadow-[skyblue] transition-all">
-        <img onclick="AddForm(${id - 1 })" src=${img} alt="" id="image-prod" class="w-[100%] h-[50%] object-cover cursor-pointer">
+        <img  src=${img} alt="" id="image-prod" class="w-[100%] h-[50%] object-cover cursor-pointer">
         <div class="flex justify-between text-[#373737] text-lfont-semibold py-2">
             <p id="name">${name}</p>
             <p>$ ${price}</p>
         </div>
         <p class="text-[#696161] py-3"> ${description}</p>
         <p class="pb-2 text-[#696161]" id="categr">${category}</p>
-        <button class="py-2 px-4 bg-[#373737] rounded-md text-white hover:opacity-70 transition-colors">Order Now</button>
+        <button onclick="AddForm(${id - 1 })" class="py-2 px-4 bg-[#373737] rounded-md text-white hover:opacity-70 transition-colors">Order Now</button>
     </div>
     `
 })
@@ -182,10 +182,11 @@ function myFunc (){
                       el.classList.remove('hidden')
                   }
                 }
-              })
+            })
       
 
-            loader.classList.add("hidden")
+        loader.classList.add("hidden")
+        
         },600)
     })
 }
@@ -198,8 +199,8 @@ inputForm.addEventListener('submit', (e)=>{
 
 function AddForm(idx){
     loader.classList.remove("hidden")
-    forPro.parentElement.classList.remove("hidden")
-    forPro.parentElement.classList.add("flex")
+    // forPro.parentElement.classList.remove("activePro")
+    forPro.parentElement.classList.remove("-top-[100%]")
 
     let {img, price, description, name, category} = products[idx]
 
@@ -219,7 +220,7 @@ function AddForm(idx){
 }
 
 function clickme(){
-    forPro.parentElement.classList.add("hidden")
+    forPro.parentElement.classList.add("-top-[100%]")
 }
 const changeOrder = document.querySelector("#select")
 
