@@ -1,269 +1,162 @@
-const parentProduct = document.querySelector('#parentProduct')
-const inputSearch = document.querySelector('#nameOf')
-const inputForm = document.querySelector('#nameOfForm')
-const forPro = document.querySelector('#forPro')
-const loader = document.querySelector('.loader')
+const openCart = document.querySelector("#cart-icon")
+const closeCart = document.querySelector("#close-cart")
+const cart = document.querySelector(".cart")
+const cartProduct = document.querySelector(".cartProduct")
+const totalPrice = document.querySelector(".total-price")
+const shopContent = document.querySelector(".shop-content")
+const modal = document.querySelector(".modal")
+const exitBtn = document.querySelector(".exit-icon")
+const modalInfo = document.querySelector(".modal-info")
+const ratedEl = document.getElementById("ratedEl")
+const loader = document.getElementsByClassName("loader")[0]
+const header = document.querySelector("header")
+const btnBuy = document.querySelector(".btn-buy")
 
-setTimeout(() => {
-    loader.classList.add("hidden")
-}, 2000);
+
+btnBuy.addEventListener('click', ()=>{
+    header.className = "active"
+
+    setTimeout(() => {
+        header.className = ""
+    }, 1000);
+    cart.classList.remove("active")
+})
+
+const api_link = 'https://fakestoreapi.com/products'
+
+var otsenka = [];
+
+const getProduct = (async (idx)=>{
+    loader.classList.add("active")
+    cart.classList.remove("active")
+    const api_link = `https://fakestoreapi.com/products/${idx}`
+    modal.classList.add("active")
+    exitBtn.classList.add("active")
+
+    let req = await fetch(api_link)
+    let data  = await req.json()
+    const {image, price, description, rating, title, category} = data;
 
 
-const products = [
-    {
-        id: 1,
-        img : "./images/1.svg",
-        name : "Sofa",
-        price : 200,
-        description : "It is a long estiabs lished fact that a reader will be the service.",
-        category : 'Mebel'
-    },
-    {
-        id: 2,
-        img : "./images/2.svg",
-        name : "Bed",
-        price : 250,
-        description : "It is a long estiabs lished fact that a reader will be the service.",
-        category : 'Mebel'
-    },
-    {
-        id: 3,
-        img : "./images/3.svg",
-        name : "Mebel",
-        price : 250,
-        description : "It is a long estiabs lished fact that a reader will be the service.",
-        category : 'Mebel'
-    },
-    {
-        id: 4,
-        img : "./images/4.svg",
-        name : "Sofass",
-        price : 250,
-        description : "It is a long estiabs lished fact that a reader will be the service.",
-        category : 'Mebel'
-    },
-    {
-        id: 5,
-        img : "./images/5.svg",
-        name : "Beatiful room",
-        price : 2500,
-        description : "It is a long estiabs lished fact that a reader will be the service.",
-        category : 'Mebel'
-    },
-    {
-        id: 6,
-        img : "./images/6.svg",
-        name : "Keyboard",
-        price : 250,
-        description : "It is a long estiabs lished fact that a reader will be the service.",
-        category : 'Mebel'
-    },
-    {
-        id: 7,
-        img : "./images/7.svg",
-        name : "Performances",
-        price : 250,
-        description : "It is a long estiabs lished fact that a reader will be the service.",
-        category : 'Mebel'
-    },
-    {
-        id: 8,
-        img : "./images/8.svg",
-        name : "Furniture Room",
-        price : 250,
-        description : "It is a long estiabs lished fact that a reader will be the service.",
-        category : 'Mebel'
-    },
-    {
-        id: 9,
-        img : "./images/9.webp",
-        name : "Super Car",
-        price : 2500,
-        description : "It is a long estiabs lished fact that a reader will be the service.",
-        category : 'Car'
-    },
-    {
-        id: 10,
-        img : "./images/10.webp",
-        name : "Mclaren",
-        price : 3500,
-        description : "It is a long estiabs lished fact that a reader will be the service.",
-        category : 'Car'
-    },
-    {
-        id: 11,
-        img : "./images/11.webp",
-        name : "Range Rover",
-        price : 5500,
-        description : "It is a long estiabs lished fact that a reader will be the service.",
-        category : 'Car'
-    },
-    {
-        id: 12,
-        img : "./images/12.webp",
-        name : "Acer",
-        price : 600,
-        description : "It is a long estiabs lished fact that a reader will be the service.",
-        category : 'Laptop'
-    },
-    {
-        id: 13,
-        img : "./images/13.jpg",
-        name : "Acer",
-        price : 600,
-        description : "It is a long estiabs lished fact that a reader will be the service.",
-        category : 'Laptop'
-    },
-    {
-        id: 14,
-        img : "./images/14.jpg",
-        name : "Asus Rog",
-        price : 900,
-        description : "It is a long estiabs lished fact that a reader will be the service.",
-        category : 'Laptop'
-    },
-    {
-        id: 15,
-        img : "./images/15.webp",
-        name : "Macbook",
-        price : 2000,
-        description : "It is a long estiabs lished fact that a reader will be the service.",
-        category : 'Laptop'
-    },
-]
-
-products.forEach(element =>{
-    setTimeout(()=>{
-        loader.classList.remove("hidden")
-        loader.classList.add("hidden")
-    },1000)
-
-    const {img, name, price, description, category, id} = element;
-
-    parentProduct.innerHTML += `
-    <div class="w-[300px] border-gray-500 bg-[#F9F9F9] shadow-lg shadow-gray-500 hover:shadow-2xl border-none px-2 py-4 rounded-lg overflow-hidden hover:shadow-[skyblue] transition-all">
-        <img  src=${img} alt="" id="image-prod" class="w-[100%] h-[50%] object-cover cursor-pointer">
-        <div class="flex justify-between text-[#373737] text-lfont-semibold py-2">
-            <p id="name" class="font-semibold text-2xl text-red-500">${name}</p>
-            <p class="font-semibold text-2xl text-cyan-500">$ ${price}</p>
-        </div>
-        <p class="text-[#696161] py-3"> ${description}</p>
-        <p class="pb-2 text-[#696161]" id="categr">Category : ${category}</p>
-        <button onclick="AddForm(${id - 1 })" class="py-2 px-4 bg-[#373737] rounded-md text-white hover:opacity-70 transition-colors">Order Now</button>
+    modalInfo.innerHTML = `
+    <img src=${image} class="product-image">
+    <div>
+        <h3 class="title">Name of product : ${title.slice(0, 10)}</h3>
+        <p><b>Category: </b> ${category}</p>
+        <br> 
+        <p><b>Description :</b>${description}</p>
+        <p id="ratedEl">Rate : <b> ${rating.rate} </b> </p>
+        <p id="priceEl">Price : <b> $${price} </b> </p>
+        
     </div>
     `
-})
-const fixedEl = document.getElementsByClassName("fixedEl")[0];
-
-fixedEl.addEventListener('click', (e)=>{
-    console.log();
-    const target = e.target.classList.contains("fixedEl")
-
-    if(target){
-        clickme()
-    }
+    loader.classList.remove("active")
 })
 
-
-function myFunc (){
-    inputSearch.addEventListener("input", () => {
-        
-        const search = inputSearch.value.toLowerCase().trim()
-    
-          parentProduct.childNodes.forEach(el=>{
-                if(el.className) {
-                  let itemName = el.querySelector('#name').textContent.toLowerCase()
-                  if (!itemName.includes(search)){
-                      el.classList.add('hidden')
-                  } else {
-                      el.classList.remove('hidden')
-                  }
-                }
-            })
-    })
-}
-myFunc()
-inputForm.addEventListener('submit', (e)=>{
-    e.preventDefault()
-
-    const search = inputSearch.value.toLowerCase().trim()
-    loader.classList.remove("hidden")
-    
-    setTimeout(()=>{
-
-        parentProduct.childNodes.forEach(el=>{
-            if(el.className) {
-              let itemName = el.querySelector('#name').textContent.toLowerCase()
-              if (!itemName.includes(search)){
-                  el.classList.add('hidden')
-              } else {
-                  el.classList.remove('hidden')
-              }
-            }
-        })
-  
-
-    loader.classList.add("hidden")
-    
-    },600)
-    
+exitBtn.addEventListener('click', ()=>{
+    modal.classList.remove("active")
+    exitBtn.classList.remove("active")
 })
 
-function AddForm(idx){
-    loader.classList.remove("hidden")
-    // forPro.parentElement.classList.remove("activePro")
-    forPro.parentElement.classList.remove("-top-[100%]")
-
-    let {img, price, description, name, category} = products[idx]
-
-    forPro.innerHTML = `
-    <img src=${img} alt="" id="image-prod" class="w-[50%] h-[500px] object-cover cursor-pointer">
-            
-        <div class="text-lg text-[#373737] flex flex-col justify-between gap-3">
-                    <p id="name" class="font-semibold text-2xl text-red-500"><b>Name of product : </b> ${name}</p>
-                    <p class="font-semibold text-2xl text-cyan-500"><b>Price : </b> $ ${price}</p>
-                <p class="text-[#696161] py-3"><b>Description: </b> ${description}</p>
-                <p class="pb-2 text-[#696161]"><b>Category : </b> ${category} </p>
-                <p class="pb-2 text-[#696161]"><b>About of product : </b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam ab, cupiditate ipsam odit, voluptatum consequatur consequuntur sit a molestiae repudiandae corporis facere porro quam atque officiis! Aliquid obcaecati reprehenderit eius! </p>
-                <button onclick="clickme()" class="py-2 mt-10 px-4 bg-[#373737] rounded-md text-white hover:opacity-70 transition-colors">Order Now</button>
+async function getData (api) {
+    let req = await fetch(api)
+    let data = await req.json()
+    data.forEach((item)=>{
+        const title = item.title.slice(0, 25)
+        const {image, price, id} = item
+        shopContent.innerHTML += `
+        <div class="product-box"  data-aos="fade-up"
+        data-aos-anchor-placement="center-bottom">
+                <img src=${image} onclick="getProduct(${id})" alt="" class="product-img">
+                <h2 class="product-title">${title + "..."}</h2>
+                <span>$</span><span class="price">${price}</span>
+                <i class='bx bx-shopping-bag add-cart'></i>
         </div>
-    `
-    loader.classList.add("hidden")
-
-}
-
-function clickme(){
-    forPro.parentElement.classList.add("-top-[100%]")
-}
-const changeOrder = document.querySelector("#select")
-
-changeOrder.addEventListener("change", () => {
-    
-    const search = changeOrder.value
-
-    parentProduct.childNodes.forEach(el=>{
-        if(el.className){
-         const categr = el.querySelector("#categr").textContent
-         if(changeOrder.value == "All"){
-             el.classList.remove('hidden')
-         } else if (!categr.includes(search)) {
-             el.classList.add('hidden')
-         } else {
-            el.classList.remove('hidden')
-         }
-        }
+        `
+        
+        loader.classList.remove("active")
+        
     })
+}
 
+getData (api_link)
+let products = JSON.parse(localStorage.getItem("obj")) ? JSON.parse(localStorage.getItem("obj")) : []
+
+
+
+// variable
+let num = 0;
+let sum = 0;
+
+
+function shoppinCart (products){
+    sum = 0
+    cartProduct.innerHTML = ""
+    products.forEach((item, idx)=>{
+        sum+= parseInt(item.price)
+            cartProduct.innerHTML += `
+
+            <div class="cart-content" data-aos="zoom-out-left">
+                <img src=${item.img} alt="" class="cart-img">
+                <div class="cart-box">
+                <div class="cart-product-title">
+                        ${item.name}
+                </div>
+                <div class="cart-price">
+                        ${item.price} $
+                </div>
+                    <input type="number" value="1" class="cart-quantity">
+                </div>
+                <!-- Remove cart -->
+                <i class="bx bxs-trash-alt cart-remove" onclick="del(${idx})"></i>
+            </div> 
+        `
+
+    totalPrice.innerHTML = "$" +sum
+    })
+    
+}
+
+
+function del(id){
+    const delTodo = products.filter((item, i) =>{
+        return  i !== id
+    })
+    products = delTodo
+    localStorage.setItem('obj', JSON.stringify(products))
+    totalPrice.innerHTML = "$" + 0
+    shoppinCart(products)
+   
+}
+
+shoppinCart(products)
+document.addEventListener("click", (e)=>{
+    num+=1
+    if(e.target.classList.contains("add-cart")){
+        let img = e.target.parentNode.childNodes[1].getAttribute("src");
+        let name = e.target.parentNode.childNodes[3].textContent
+        let price = e.target.parentNode.childNodes[6].textContent       
+        
+            let obj = {
+                img,
+                name,
+                price,
+                num,
+            }
+            products.push(obj)
+            localStorage.setItem("obj",JSON.stringify(products))
+            let object = JSON.parse(localStorage.getItem("obj"))
+            
+            shoppinCart(object) 
+    } 
+        
 })
 
+openCart.addEventListener("click", ()=>{
+    cart.classList.add("active")
+})
 
+closeCart.addEventListener("click", ()=>{
+    cart.classList.remove("active")
+})
 
-
-//   if(el.className) {
-//     let itemName = el.querySelector('#name').textContent.toLowerCase()
-//     if (!itemName.includes(search)){
-//         el.classList.add('hidden')
-//     } else {
-//         el.classList.remove('hidden')
-//     }
-//   }

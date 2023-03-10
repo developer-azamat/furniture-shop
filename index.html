@@ -4,202 +4,61 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Furniture shop</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- link css -->
+    <title>Ecommerce Web-site --Shopping Cart</title>
+    <!-- css link -->
     <link rel="stylesheet" href="./css/main.css">
-    <!-- font awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Revalia&display=swap" rel="stylesheet">
-    <!-- data aos -->
+    <!-- Box icons link-->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    
-
-    <div class="fixed z-[99999999] w-[100%] h-[100vh] flex items-center justify-center loader">
-        <img src="./images/loader.gif" alt="" class="rounded-[50%] py-10 px-5  animate-bounce w-[400px] h-[400px]">
-    </div>
-    
-    <div class="fixed fixedEl w-[100%] activePro flex -top-[100%] duration-200 ease-in-out items-center justify-center z-[999999]  h-[100vh]" >
-        <div class="w-[900px] gap-5 border-gray-500 bg-[#F9F9F9] shadow-lg shadow-gray-500 hover:shadow-2xl border-none px-2 py-4 rounded-lg overflow-hidden items-start hover:shadow-[skyblue] transition-all flex product" id="forPro"></div>
-        <div class="fixed w-[200px] top-0 left-0 h-[100px bg-black] pt-[100px]">
+    <!-- header -->
+    <header>
+        <div class="loader active">
+            <img src="./loader/loader.gif" alt="">
+        </div>
+        <div class="modal">
+            <div class="exit-icon" ><i class="fa-solid fa-circle-xmark"></i></div>
+            <div class="modal-info">
+            
+            </div>
 
         </div>
-    </div>
-    <!-- /container -->
-    <div class="bg-[#E5E5E5]">
         <!-- navbar -->
-        <div class="fixed bg-white top-0 w-full z-[9999] px-[20px] py-[10px] flex justify-between items-center">
-            <div class="text-xl font-semibold"><a href="#">SQ R3</a></div>
-            <div class="flex gap-5 items-center list-none justify-center">
-                <li><a href="#" class="transition-colors hover:text-[red]">Home</a></li>
-                <li><a href="#" class="transition-colors hover:text-[red]">About</a></li>
-                <li><a href="#" class="transition-colors hover:text-[red]">Service</a></li>
-                <li><a href="#" class="transition-colors hover:text-[red]">Furniture</a></li>
-                <button class="py-2 px-4 bg-[#373737] rounded-md text-white hover:opacity-70 transition-colors">Order Now</button>
-                <img src="./images/Search.svg" class="w-10 h-5 cursor-pointer" alt="">
+        <div class="nav container">
+
+            <a href="#" class="logo">Ecommerce</a>
+            <!-- Cart icon -->
+            <i class='bx bx-shopping-bag' id="cart-icon"></i>
+            <div class="cart">
+                <h2 class="card-title">Your cart</h2>
+                <!-- cart content -->
+                <div class="cartProduct"></div>
+                <!-- Total -->
+                <div class="total">
+                    <div class="total-title">Total</div>
+                    <div class="total-price">$0</div>
+                </div>
+                <!-- .buy-button -->
+                <button type="button" class="btn-buy">Buy now</button>
+                <!-- close cart -->
+                <i class="bx bx-x" id="close-cart"></i>
             </div>
         </div>
-
-
-        <header class="w-[100%] h-[110vh] bg-[url('./images/back-header.svg')] flex items-center relative">
-            <div class="text-4xl text-white flex flex-col justify-center h-[100%] gap-7 px-10 w-[15%] bg-black items-center" id="header">
-                <i class="fa-brands fa-facebook hover:text-blue-600 hover:rotate-45 transition-all"></i>
-                <i class="fa-brands fa-instagram hover:text-blue-600 hover:rotate-45 transition-all"></i>
-                <i class="fa-brands fa-twitter hover:text-blue-600 hover:rotate-45 transition-all"></i>
-            </div>
-            <div class="w-[90%] text-center py-10 bg-white h-[50vh]" id="header">
-                <h1 class="text-5xl leading-tight font-['Revalia'] ">Enjoy your life in our <br> luxurious furniture</h1>
-                    <p class="text-white py-6">If you are looking for a furniture then you have
-                        come to the right place.</p>
-                <button class="py-2 px-4 bg-[#373737] rounded-md text-white hover:opacity-70 transition-colors">Order Now</button>
-                
-            </div>
-            <div class="flex items-center bg-white w-[100%] gap-7 absolute bottom-0 left-0">
-                <span class="block w-[14.3vw] h-[100px] bg-black"></span>
-                <div class="text-center">
-                    <p class="text-4xl font-semibold">120 k</p>
-                    <p>Furniture Sale</p>
-                </div>
-                <div class="text-center">
-                    <p class="text-4xl font-semibold">98 k</p>
-                    <p>Review <b class="text-yellow-400"> &#9733;</b> (4.5)</p>
-                </div>
-                <div class="text-center">
-                    <p class="text-4xl font-semibold">125</p>
-                    <p>Furniture Categories</p>
-                </div>
-                
-            </div>
-        </header>
-
-        <div class="text-center py-10">
-            <h1 class="text-2xl">Our Furniture</h1>
-            <h2 class="text-[#373737]">It is a long established fact that a reader <br> will be distracted by the service.</h2>
-        </div>
-
-        <div class="flex justify-between py-5 px-[50px]">
-            <form class="bg-[#EFEFEF]" id="nameOfForm">
-                <input type="text" placeholder="Search a furniture" class="pl-2 outline-none bg-[#EFEFEF]" id="nameOf">
-                <button class="py-2 px-5 text-white bg-black"><i class="fa-solid fa-magnifying-glass"></i></button>
-            </form>
-            <select name="select" id="select" class=" px-2 bg-gray-400 text-white py-1 rounded-md outline-none cursor-pointer" size="1">
-                <option value="All">All</option>
-                <option value="Mebel">Mebel</option>
-                <option value="Laptop">Laptop</option>
-                <option value="Car">Car</option>
-            </select>
-        </div>
-        <div class="px-[50px] flex justify-center gap-5 py-10 flex-wrap" id="parentProduct">
-            <!-- cart -->
-            
-            
-        </div>
-
-        <div class="mx-[50px]">
-            <h1 class="text-3xl font-semibold">What say clients about us</h1>
-            <div class="flex items-center gap-5 mb-10">
-                <span class="w-20 h-1 block bg-gray-700"></span>
-                <p class="text-[#373737]">It is a long established fact that a reader <br> will be distracted by the service.</p>
-            </div>
-        </div>
-
-
-        <p class="opacity-0"><code>wrapAround: true</code></p>
-
-            <!-- Flickity HTML init -->
-            <div class="gallery js-flickity"
-            data-flickity-options='{ "wrapAround": true }'>
-            <div class="gallery-cell cart">
-                <img src="./images/foot-top-1.svg" alt="">
-                <div class="">
-                    <h1 class="text-[#373737] text-xl font-semibold ">Mr. Jone Ambrose</h1>
-                    <p class="text-[#373737] pb-2">20 - 07 - 21</p>
-                    <p class="text-[#373737]">“Lorem Ipsum has been the industry by standard dummy text ever to since the 1500s, it’s  type and scrambled it to make a type specimen book. It’s has survived not only five.”</p>
-                    <p class="text-yellow-400 text-3xl py-3">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
-                </div>
-            </div>
-            <div class="gallery-cell cart">
-                <img src="./images/foot-top-2.svg" alt="">
-                <div class="">
-                    <h1 class="text-[#373737] text-xl font-semibold ">Mr. Jone Ambrose</h1>
-                    <p class="text-[#373737] pb-2">20 - 07 - 21</p>
-                    <p class="text-[#373737]">“Lorem Ipsum has been the industry by standard dummy text ever to since the 1500s, it’s  type and scrambled it to make a type specimen book. It’s has survived not only five.”</p>
-                    <p class="text-yellow-400 text-3xl py-3">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
-                </div>
-            </div>
-            <div class="gallery-cell cart">
-                <img src="./images/foot-top-1.svg" alt="">
-                <div class="">
-                    <h1 class="text-[#373737] text-xl font-semibold ">Mr. Jone Ambrose</h1>
-                    <p class="text-[#373737] pb-2">20 - 07 - 21</p>
-                    <p class="text-[#373737]">“Lorem Ipsum has been the industry by standard dummy text ever to since the 1500s, it’s  type and scrambled it to make a type specimen book. It’s has survived not only five.”</p>
-                    <p class="text-yellow-400 text-3xl py-3">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
-                </div>
-            </div>
-            <div class="gallery-cell cart">
-                <img src="./images/foot-top-2.svg" alt="">
-                <div class="">
-                    <h1 class="text-[#373737] text-xl font-semibold ">Mr. Jone Ambrose</h1>
-                    <p class="text-[#373737] pb-2">20 - 07 - 21</p>
-                    <p class="text-[#373737]">“Lorem Ipsum has been the industry by standard dummy text ever to since the 1500s, it’s  type and scrambled it to make a type specimen book. It’s has survived not only five.”</p>
-                    <p class="text-yellow-400 text-3xl py-3">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
-                </div>
-            </div>
-            
-            </div>
-<!-- </section> -->
-
-        <div class="flex justify-between bg-[#373737] text-white px-[50px] py-4 mt-10">
-            <div>
-                <h1 class="text-3xl font-semibold mb-5">SQ R3</h1>
-                <div class="flex gap-2 py-2">
-                    <i class="fa-solid fa-phone p-2 bg-white text-black rounded-full"></i>
-                   <p>+8801760-007083</p>
-                </div>
-                <div class="flex gap-2">
-                    <i class="fa-solid fa-envelope p-2 bg-white text-black rounded-full"></i>
-                   <p>uiuxmdomith@gmail.com</p>
-                </div>
-                <div class="flex gap-4 text-xl py-4 px-2">
-                    <i class="fa-brands fa-facebook"></i>
-                    <i class="fa-brands fa-instagram"></i>
-                    <i class="fa-brands fa-twitter"></i>
-                    <i class="fa-brands fa-linkedin"></i>
-                </div>
-            </div>
-            <div>
-                <h1 class="text-xl mb-5">Usefull Links</h1>
-                <p>Home</p>
-                <p>About Us</p>
-                <p>Service</p>
-                <p>Furniture</p>
-            </div>
-            <div>
-                <h1 class="text-xl mb-5">FAQ</h1>
-                <p>Home</p>
-                <p>About Us</p>
-                <p>Service</p>
-                <p>Furniture</p>
-            </div>
-            <div>
-                <h1 class="text-xl mb-2">Newsletter</h1>
-                <input type="email" class="w-7/12 px-2 py-1 border-none text-black outline-none rounded-lg" placeholder="Enter your mail">
-                <button class="py-1 px-5 rounded-lg bg-white text-black">Send</button>
-                <br>
-                <button class="py-1 px-5 rounded-lg bg-white text-[#373737] font-bold my-3"><a href="#">Download App</a></button>
-            </div>
-        </div>
-    </div>
+    </header>
+    <!-- shop -->
+    <section class="shop container" >
+        <h2 class="section-title">Shop Products</h2>
+        <!-- content -->
+        <div class="shop-content"></div>
+    </section>
+    <!-- link to js -->
+    <script src="./js/main.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
-<script src="./js/main.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/1.0.0/flickity.pkgd.js"></script>
-<!-- aos -->
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-    AOS.init();
-</script>
-</html>
+
+</html>-
